@@ -3,7 +3,7 @@ import java.sql.*;
 public class jdbcexamplecreatetable {
    // JDBC driver name and database URL
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://localhost/jdbc";
+   static final String DB_URL = "jdbc:mysql://localhost/jdbc/vikas";
 
    //  Database credentials
    static final String USER = "root";
