@@ -4,7 +4,7 @@ public class Append {
 
    public static void main(String[] args) {
   
-   StringBuilder str = new StringBuilder("vikas ");
+   StringBuilder str = new StringBuilder("Mr.vikas ");
    System.out.println("string = " + str);
     
    // appends the string argument to the StringBuilder
