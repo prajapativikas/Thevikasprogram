@@ -6,11 +6,13 @@ public class Banari
 	int j=0B101;
 	int k=0b1010;
 	int K=101;
+	int m=102;
 	
 	System.out.println(i);
 	System.out.println(j);
 	System.out.println(k);
 	System.out.println(K);
+	System.out.println(m);
 	
     }
 
