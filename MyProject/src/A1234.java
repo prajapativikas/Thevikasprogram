@@ -9,3 +9,4 @@ public class A1234 {
 		f.setVisible(true);
 	}
 }
+}
