@@ -1,0 +1,910 @@
+package slproject;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+/**
+ *
+ * @author nimbus
+ */
+public class edit_table extends javax.swing.JFrame {
+
+    /**
+     * Creates new form edit_table
+     */
+    File selectedFile = null;
+    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+    String currentImgPath;
+
+    public edit_table() {
+        initComponents();
+        fill_combo();
+
+        try {
+            Image i = ImageIO.read(getClass().getResource("sls_logo.png"));
+            setIconImage(i);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setTitle(Config.PRODUCTTITLE + "_" + Config.VERSION + " - Update Purchase (Current User : " + Config.currentUserFullName + ")");
+        fetchProductIds(cbProductName.getSelectedItem().toString());
+
+        jxdpPurchaseDate.setFormats(formater);
+        jxdpPurchaseDate.getEditor().setEditable(false);
+
+        //To set the upper bound (Blocking future dates)
+        Calendar calendar = jxdpPurchaseDate.getMonthView().getCalendar();
+        calendar.setTime(new Date());
+        jxdpPurchaseDate.getMonthView().setUpperBound(calendar.getTime());
+        hideShowMacAddressFields(false);
+        hideShowRAMFields(false);
+        hideShowIPAddressFields(false);
+        hideShowProcessorFields(false);
+        //Hide Mac Address Fileds
+        
+        btnSelectImg.setToolTipText(null);
+        btnSelectImg.setEnabled(false);
+    }
+
+    private void hideShowRAMFields(boolean hideShow) {
+        lblRAM.setEnabled(hideShow);
+        txtRAM.setEnabled(hideShow);
+    }
+
+    private void hideShowProcessorFields(boolean hideShow) {
+        lblProcessor.setEnabled(hideShow);
+        txtProcessor.setEnabled(hideShow);
+    }
+
+    private void hideShowIPAddressFields(boolean hideShow) {
+        lblIP.setEnabled(hideShow);
+        txtIPAddress.setEnabled(hideShow);
+    }
+
+    private void hideShowMacAddressFields(boolean hideShow) {
+        lblMacAddress.setEnabled(hideShow);
+        txtMacAddress.setEnabled(hideShow);
+    }
+
+    private void fill_combo() //FETCH VALUE IN COMBOBOX
+    {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + Config.DBHOST + ":3306/" + Config.SCHEMANAME, Config.DBUSER, Config.DBPASS);
+            String sql = "SELECT inv_name FROM inventory_master";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String inv_name = rs.getString("inv_name");
+                cbProductName.addItem(inv_name);
+//                String inv_code = rs.getString("inv_code");
+//                jComboBox2.addItem(inv_code);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Exception",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void fetchProductIds(String inv_name) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + Config.DBHOST + ":3306/" + Config.SCHEMANAME, Config.DBUSER, Config.DBPASS);
+            String id = "";
+
+            id = "select id_no from purchase_table where name = '" + inv_name.trim() + "' and active = 1";
+            PreparedStatement ps = con.prepareStatement(id);
+            ResultSet rs = ps.executeQuery();
+
+            cbProductIdNo.removeAllItems();
+            while (rs.next()) {
+                String id_no = rs.getString("id_no");
+                cbProductIdNo.addItem(id_no);
+
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("[fetch_data] Problem : " + e.getMessage());
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTextField2 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        lblId = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        lblProcessor = new javax.swing.JLabel();
+        lblProductBrand = new javax.swing.JLabel();
+        lblModelNo = new javax.swing.JLabel();
+        lblSeialNo = new javax.swing.JLabel();
+        lblProductCost = new javax.swing.JLabel();
+        cbProductIdNo = new javax.swing.JComboBox();
+        txtProcessor = new javax.swing.JTextField();
+        txtProductBrand = new javax.swing.JTextField();
+        txtModelNo = new javax.swing.JTextField();
+        txtSerialNo = new javax.swing.JTextField();
+        txtProductCost = new javax.swing.JTextField();
+        btnShow = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taComment = new javax.swing.JTextArea();
+        lblComment = new javax.swing.JLabel();
+        btnHome = new javax.swing.JButton();
+        jxdpPurchaseDate = new org.jdesktop.swingx.JXDatePicker();
+        jLblImage = new javax.swing.JLabel();
+        btnSelectImg = new javax.swing.JButton();
+        lblImage = new javax.swing.JLabel();
+        lblMacAddress = new javax.swing.JLabel();
+        txtMacAddress = new javax.swing.JTextField();
+        cbProductName = new javax.swing.JComboBox<String>();
+        lblIP = new javax.swing.JLabel();
+        txtIPAddress = new javax.swing.JTextField();
+        lblRAM = new javax.swing.JLabel();
+        txtRAM = new javax.swing.JTextField();
+
+        jLabel10.setText("Request By");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Update Purchase");
+        setResizable(false);
+
+        lblId.setText("Id");
+
+        lblName.setText("Name");
+
+        lblDate.setText("Date");
+
+        lblProcessor.setText("Processor");
+
+        lblProductBrand.setText("Product Brand");
+
+        lblModelNo.setText("Model No.");
+
+        lblSeialNo.setText("Serial No.");
+
+        lblProductCost.setText("Product Cost");
+
+        cbProductIdNo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select  Id" }));
+        cbProductIdNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProductIdNoActionPerformed(evt);
+            }
+        });
+
+        txtProcessor.setMaximumSize(new java.awt.Dimension(193, 532));
+        txtProcessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProcessorActionPerformed(evt);
+            }
+        });
+
+        btnShow.setText("Show");
+        btnShow.setToolTipText("Click to show product details");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.setToolTipText("Click to update product");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        taComment.setColumns(20);
+        taComment.setRows(5);
+        jScrollPane1.setViewportView(taComment);
+
+        lblComment.setText("Comment");
+
+        btnHome.setText("Home");
+        btnHome.setToolTipText("Click go to home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+
+        jxdpPurchaseDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jxdpPurchaseDateActionPerformed(evt);
+            }
+        });
+
+        jLblImage.setText("Image");
+
+        btnSelectImg.setText("Image");
+        btnSelectImg.setToolTipText("");
+        btnSelectImg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectImgActionPerformed(evt);
+            }
+        });
+
+        lblImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblImageMouseClicked(evt);
+            }
+        });
+
+        lblMacAddress.setText("Mac Address");
+
+        cbProductName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "select name" }));
+        cbProductName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProductNameActionPerformed(evt);
+            }
+        });
+
+        lblIP.setText("IP Address");
+
+        lblRAM.setText("RAM");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblName)
+                            .addComponent(lblDate)
+                            .addComponent(lblProcessor)
+                            .addComponent(lblProductBrand)
+                            .addComponent(jLblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRAM))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtProductBrand)
+                            .addComponent(txtProductCost, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(cbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelectImg)
+                            .addComponent(txtRAM)
+                            .addComponent(jxdpPurchaseDate, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblIP)
+                            .addComponent(lblSeialNo)
+                            .addComponent(lblModelNo)
+                            .addComponent(lblComment)
+                            .addComponent(btnHome)
+                            .addComponent(lblMacAddress)
+                            .addComponent(lblId)))
+                    .addComponent(lblProductCost)
+                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtIPAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtModelNo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(txtSerialNo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMacAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbProductIdNo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(btnShow)))
+                .addGap(37, 37, 37))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbProductIdNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShow))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblModelNo)
+                            .addComponent(txtModelNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtSerialNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSeialNo)
+                            .addComponent(lblProcessor)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblId)
+                            .addComponent(lblName)
+                            .addComponent(cbProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jxdpPurchaseDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDate))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtProcessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblComment)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblMacAddress)
+                            .addComponent(txtMacAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblProductBrand)
+                            .addComponent(txtProductBrand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProductCost)
+                            .addComponent(txtProductCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRAM)
+                            .addComponent(txtRAM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLblImage)
+                            .addComponent(btnSelectImg)))
+                    .addComponent(lblIP)
+                    .addComponent(txtIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnHome)
+                            .addComponent(btnUpdate))))
+                .addGap(158, 158, 158))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtProcessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProcessorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProcessorActionPerformed
+
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+        // TODO add your handling code here:
+        try {
+            clearFields(false);
+
+            if (cbProductName.getSelectedIndex() != 0) {
+                if (cbProductIdNo.getSelectedItem() != null && cbProductIdNo.getSelectedItem().toString().trim().length() > 0) {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://" + Config.DBHOST + ":3306/" + Config.SCHEMANAME, Config.DBUSER, Config.DBPASS);
+                    String sql = "select * from purchase_table where name = '"
+                            + cbProductName.getSelectedItem().toString().trim() + "' "
+                            + "and id_no = " + cbProductIdNo.getSelectedItem().toString().trim();
+
+                    PreparedStatement ps = con.prepareStatement(sql);
+                    ResultSet rs = ps.executeQuery();
+
+                    while (rs.next()) {
+                        jxdpPurchaseDate.setDate(rs.getDate("date"));
+                        //     txtProcessor.setText(rs.getString(5));
+                        txtProductBrand.setText(rs.getString(6));
+                        txtModelNo.setText(rs.getString(7));
+                        txtSerialNo.setText(rs.getString(8));
+                        txtProductCost.setText(rs.getString(9));
+                        taComment.setText(rs.getString(12));
+
+                        if (rs.getString("processor") != null && rs.getString("processor").trim().length() > 0) {
+                            hideShowProcessorFields(true);
+
+                            txtProcessor.setText(rs.getString(5).trim());
+                        } else {
+                            hideShowProcessorFields(false);
+                            txtProcessor.setText("");
+                        }
+
+                        if (rs.getString("ram") != null && rs.getString("ram").trim().length() > 0) {
+                            hideShowRAMFields(true);
+                            txtRAM.setText(rs.getString(19).trim());
+                        } else {
+                            hideShowRAMFields(false);
+                            txtRAM.setText("");
+                        }
+
+                        if (rs.getString("ip_address") != null && rs.getString("ip_address").trim().length() > 0) {
+                            hideShowIPAddressFields(true);
+
+                            txtIPAddress.setText(rs.getString(18).trim());
+                        } else {
+                            hideShowIPAddressFields(false);
+                            txtIPAddress.setText("");
+                        }
+
+                        if (rs.getString("mac_address") != null && rs.getString("mac_address").trim().length() > 0) {
+                            hideShowMacAddressFields(true);
+                            txtMacAddress.setText(rs.getString(17).trim());
+                        } else {
+                            hideShowMacAddressFields(false);
+                            txtMacAddress.setText("");
+                        }
+
+                        if (rs.getBinaryStream(16) != null) {
+                            btnSelectImg.setText("Change Image");
+                            btnSelectImg.setToolTipText("Select new product image to change existing");
+                            btnSelectImg.setEnabled(true);
+
+                            File f;
+                            InputStream in = rs.getBinaryStream(16);
+                            f = new File("edit_product.jpg");
+                            currentImgPath = f.getAbsolutePath();
+                            try (OutputStream os = new FileOutputStream(f)) {
+                                int c;
+                                while ((c = in.read()) > -1) {
+                                    os.write(c);
+                                }
+                            }
+
+                            BufferedImage img = ImageIO.read(f);
+                            Image scimg = img.getScaledInstance(275, 92, 4);
+                            ImageIcon imageIcon = new ImageIcon(scimg);
+
+                            lblImage.setIcon(imageIcon);
+
+                            selectedFile = f;
+                        } else {
+                            btnSelectImg.setText("Select Image");
+                            btnSelectImg.setToolTipText("Select product image");
+                            lblImage.setIcon(null);
+                            btnSelectImg.setEnabled(true);
+                        }
+                    }
+                    con.close();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No product available under the selected product name","No product available",JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select product name","Select product name",JOptionPane.WARNING_MESSAGE);
+                cbProductName.requestFocus();
+            }
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Exception",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnShowActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (cbProductName.getSelectedItem() != cbProductName.getItemAt(0)) {
+                if (cbProductIdNo.getSelectedItem() != null) {
+                    if (jxdpPurchaseDate.getDate() != null) {
+                        if (txtModelNo.getText() != null && txtModelNo.getText().trim().length() > 0) {
+                            if (txtSerialNo.getText() != null && txtSerialNo.getText().trim().length() > 0) {
+                                if (txtProductBrand.getText() != null && txtProductBrand.getText().trim().length() > 0) {
+                                    if (txtProductCost.getText() != null && txtProductCost.getText().trim().length() > 0) {
+
+                                        boolean ProcessorOK = true;
+                                        if (txtProcessor.isEnabled()) {
+                                            if (txtProcessor.getText() != null && txtProcessor.getText().trim().length() > 0) {
+                                                ProcessorOK = true;
+                                            } else {
+                                                ProcessorOK = false;
+                                            }
+                                        }
+
+                                        boolean RAMOK = true;
+                                        if (txtRAM.isEnabled()) {
+                                            if (txtRAM.getText() != null && txtRAM.getText().trim().length() > 0) {
+                                                RAMOK = true;
+                                            } else {
+                                                RAMOK = false;
+                                            }
+                                        }
+
+                                        boolean IpOK = true;
+                                        if (txtIPAddress.isEnabled()) {
+                                            if (txtIPAddress.getText() != null && txtIPAddress.getText().trim().length() > 0) {
+                                                IpOK = true;
+                                            } else {
+                                                IpOK = false;
+                                            }
+                                        }
+
+                                        boolean macOk = true;
+                                        if (txtMacAddress.isEnabled()) {
+                                            if (txtMacAddress.getText() != null && txtMacAddress.getText().trim().length() > 0) {
+                                                macOk = true;
+                                            } else {
+                                                macOk = false;
+                                            }
+                                        }
+
+                                        if (ProcessorOK) {
+                                            if (RAMOK) {
+                                                if (IpOK) {
+                                                    if (macOk) {
+                                                        Class.forName("com.mysql.jdbc.Driver");
+                                                        Connection con = DriverManager.getConnection("jdbc:mysql://" + Config.DBHOST + ":3306/" + Config.SCHEMANAME, Config.DBUSER, Config.DBPASS);
+                                                        //Statement st = con.createStatement();
+
+                                                        FileInputStream fis = null;
+                                                        if (selectedFile != null) {
+                                                            fis = new FileInputStream(selectedFile);
+                                                        }
+                                                        //String sql = "update purchase_table set name = '" + jTextField1.getText() + "',date = '" + jTextField2.getText() + "',p_type = '" + jTextField3.getText() + "',p_brand = '" + jTextField4.getText() + "',model_no = '" + jTextField5.getText() + "',serial_no = '" + jTextField6.getText() + "',p_cost = '" + jTextField7.getText() + "',request = '" + jTextField8.getText() + "',comment = '" + jTextArea1.getText() + "' where id_no = '" + jComboBox1.getSelectedItem().toString() + "'";
+                                                        String sql = "update purchase_table set date = ?,"
+                                                                + " p_brand = ?, model_no = ?, serial_no = ?,"
+                                                                + " p_cost = ?,"
+                                                                + " comment = ?, image = ?";
+                                                        if (txtMacAddress.isVisible() && txtMacAddress.isEnabled() && txtProcessor.isVisible() && txtProcessor.isEnabled() && txtIPAddress.isVisible() && txtIPAddress.isEnabled() && txtRAM.isVisible() && txtRAM.isEnabled()) {
+                                                            sql += ", mac_address = ?, "
+                                                                    + "processor = ?, ip_address = ?, ram = ?";
+                                                            System.out.println("sql " + sql);
+                                                        }
+                                                        sql += " where name = '" + cbProductName.getSelectedItem().toString() + "' and id_no = "
+                                                                + cbProductIdNo.getSelectedItem().toString().trim();
+
+                                                        PreparedStatement stmt = con.prepareStatement(sql);
+                                                        //stmt.setString(1, cbProductName.getSelectedItem().toString());
+                                                        stmt.setString(1, formater.format(jxdpPurchaseDate.getDate()));
+
+                                                        // stmt.setString(2, txtProcessor.getText().trim());
+                                                        stmt.setString(2, txtProductBrand.getText().trim());
+                                                        stmt.setString(3, txtModelNo.getText().trim());
+                                                        stmt.setString(4, txtSerialNo.getText().trim());
+                                                        stmt.setString(5, txtProductCost.getText().trim());
+                                                        stmt.setString(6, taComment.getText().trim());
+
+                                                        if (selectedFile != null) {
+                                                            stmt.setBinaryStream(7, (InputStream) fis, (int) selectedFile.length());
+                                                        } else {
+                                                            stmt.setBinaryStream(7, null, 0);
+                                                        }
+
+                                                        if (txtMacAddress.isVisible() && txtMacAddress.isEnabled()) {
+                                                            if (txtMacAddress.getText() != null && txtMacAddress.getText().trim().length() > 0) {
+                                                                stmt.setString(8, txtMacAddress.getText().trim());
+                                                            } else {
+                                                                stmt.setString(8, "");
+                                                            }
+                                                        }
+
+                                                        if (txtProcessor.isVisible() && txtProcessor.isEnabled()) {
+                                                            if (txtProcessor.getText() != null && txtProcessor.getText().trim().length() > 0) {
+                                                                stmt.setString(9, txtProcessor.getText().trim());
+                                                            } else {
+                                                                stmt.setString(9, "");
+                                                            }
+                                                        }
+
+                                                        if (txtIPAddress.isVisible() && txtIPAddress.isEnabled()) {
+                                                            if (txtIPAddress.getText() != null && txtIPAddress.getText().trim().length() > 0) {
+                                                                stmt.setString(10, txtIPAddress.getText().trim());
+                                                            } else {
+                                                                stmt.setString(10, "");
+                                                            }
+                                                        }
+                                                        if (txtRAM.isVisible() && txtRAM.isEnabled()) {
+                                                            if (txtRAM.getText() != null && txtRAM.getText().trim().length() > 0) {
+                                                                stmt.setString(11, txtRAM.getText().trim());
+                                                            } else {
+                                                                stmt.setString(11, "");
+                                                            }
+                                                        }
+
+//            if (selectedFile != null) {
+//                fis = new FileInputStream(selectedFile);
+//                stmt.setBinaryStream(10, (InputStream) fis, (int) selectedFile.length());
+//            } else {
+//                stmt.setBinaryStream(10, null, 0);
+//            }
+                                                        stmt.executeUpdate();
+                                                        //System.out.println("query is " + sql);
+                                                        con.close();
+
+                                                        JOptionPane.showMessageDialog(this, "Data Updated Successfully","Update successfully",JOptionPane.INFORMATION_MESSAGE);
+
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(this, "Please enter mac address","Enter MAC address",JOptionPane.WARNING_MESSAGE);
+                                                        txtMacAddress.requestFocus();
+                                                    }
+                                                } else {
+                                                    JOptionPane.showMessageDialog(this, "Please enter ip address","Enter IP address",JOptionPane.WARNING_MESSAGE);
+                                                    txtIPAddress.requestFocus();
+                                                }
+                                            } else {
+                                                JOptionPane.showMessageDialog(this, "Please enter RAM","Enter RAM",JOptionPane.WARNING_MESSAGE);
+                                                txtRAM.requestFocus();
+                                            }
+
+                                        } else {
+                                            JOptionPane.showMessageDialog(this, "Please enter processor","Enter processor",JOptionPane.WARNING_MESSAGE);
+                                            txtProcessor.requestFocus();
+                                        }
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "Please enter product cost","Enter product cost", JOptionPane.WARNING_MESSAGE);
+                                        txtProductCost.requestFocus();
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Please enter product brand","Enter product brand",JOptionPane.WARNING_MESSAGE);
+                                    txtProductBrand.requestFocus();
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Please enter serial number","Enter serial number",JOptionPane.WARNING_MESSAGE);
+                                txtSerialNo.requestFocus();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Please enter model number","Enter model number",JOptionPane.WARNING_MESSAGE);
+                            txtModelNo.requestFocus();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Please select date","Select date",JOptionPane.WARNING_MESSAGE);
+                        jxdpPurchaseDate.requestFocus();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please select product id","Select product id",JOptionPane.WARNING_MESSAGE);
+                    cbProductIdNo.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select product name","Select product name",JOptionPane.WARNING_MESSAGE);
+                cbProductName.requestFocus();
+            }
+        } catch (ClassNotFoundException | SQLException | FileNotFoundException | HeadlessException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Exception",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+        start_page start = new start_page();
+        start.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void cbProductIdNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductIdNoActionPerformed
+        clearFields(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_cbProductIdNoActionPerformed
+
+    private void jxdpPurchaseDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxdpPurchaseDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jxdpPurchaseDateActionPerformed
+
+    private void btnSelectImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectImgActionPerformed
+        try {
+            final JFileChooser fileDialog = new JFileChooser();
+            fileDialog.setAcceptAllFileFilterUsed(false);
+            fileDialog.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "jpeg", "bmp"));
+            int returnVal = fileDialog.showOpenDialog(this);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                selectedFile = fileDialog.getSelectedFile();
+                //JOptionPane.showMessageDialog(this, "You selected file : " + selectedFile.getAbsolutePath());
+
+//                BufferedImage img = ImageIO.read(selectedFile);
+//                Image scimg = img.getScaledInstance(lblImage.getWidth(),
+//                        lblImage.getHeight(), 4);
+//                ImageIcon imageIcon = new ImageIcon(scimg);
+//
+//                lblImage.setIcon(imageIcon);
+                currentImgPath = selectedFile.getAbsolutePath();
+                BufferedImage img = ImageIO.read(selectedFile);
+                Image scimg = img.getScaledInstance(275, 92, 4);
+                ImageIcon imageIcon = new ImageIcon(scimg);
+
+               
+                lblImage.setIcon(imageIcon);
+            } else {
+                //JOptionPane.showMessageDialog(this, "You cancelled image selection.");
+            }
+        } catch (HeadlessException | IOException e) {
+
+        }
+    }//GEN-LAST:event_btnSelectImgActionPerformed
+
+    private void clearFields(boolean productDropdown) {
+        jxdpPurchaseDate.setDate(null);
+        txtModelNo.setText("");
+        txtSerialNo.setText(null);
+        txtProcessor.setText("");
+        txtProductBrand.setText("");
+        txtProductCost.setText("");
+        taComment.setText("");
+        txtMacAddress.setText("");
+        lblImage.setIcon(null);
+        txtIPAddress.setText("");
+        txtRAM.setText("");
+        btnSelectImg.setText("Image");
+        btnSelectImg.setEnabled(false);
+
+        try {
+            if (productDropdown) {
+                cbProductName.setSelectedIndex(0);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+    private void cbProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductNameActionPerformed
+        try {
+            clearFields(false);
+
+            if (cbProductName.getSelectedItem() != null) {
+                fetchProductIds(cbProductName.getSelectedItem().toString().trim());
+            }
+            String prName = cbProductName.getSelectedItem().toString();
+
+            Class.forName("com.mysql.jdbc.Driver");
+            String sql;
+            Connection con = DriverManager.getConnection("jdbc:mysql://" + Config.DBHOST + ":3306/" + Config.SCHEMANAME, Config.DBUSER, Config.DBPASS);
+            sql = "SELECT inv_code FROM inventory_master where inv_name='" + prName + "'";
+           
+       //     SELECT purchase_table.id_no from purchase_table left join inventory_master on purchase_table.id_code = inventory_master.inv_code where purchase_table.status=1
+            //     sql = "SELECT max(id_no) as id_no FROM purchase_table where name = '" + prName + "'  ";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+
+            while (rs.next()) {
+
+//                String inv_name = rs.getString("inv_name");
+//                jComboBox1.addItem(inv_name);
+                String inv_code = rs.getString("inv_code");
+//                lblCode.setText(inv_code);
+
+                if (inv_code.toLowerCase().equalsIgnoreCase("sld")
+                        || inv_code.toLowerCase().equalsIgnoreCase("sll")
+                        || inv_code.toLowerCase().equalsIgnoreCase("slpr")
+                        || inv_code.toLowerCase().equalsIgnoreCase("sltb")
+                        || inv_code.toLowerCase().equalsIgnoreCase("slrt")) {
+                    hideShowMacAddressFields(true);
+                    hideShowRAMFields(true);
+                    hideShowIPAddressFields(true);
+                    hideShowProcessorFields(true);
+
+                } else {
+                    hideShowMacAddressFields(false);
+                    hideShowRAMFields(false);
+                    hideShowIPAddressFields(false);
+                    hideShowProcessorFields(false);
+
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Exception",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cbProductNameActionPerformed
+
+    private void lblImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblImageMouseClicked
+        // TODO add your handling code here:
+        
+        Config.IMGPATH = currentImgPath;
+        
+        ProductImage pi = new ProductImage();
+        pi.setVisible(true);
+        //dispose();
+        
+    }//GEN-LAST:event_lblImageMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(edit_table.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new edit_table().setVisible(true);
+            }
+        });
+    }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnSelectImg;
+    private javax.swing.JButton btnShow;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox cbProductIdNo;
+    private javax.swing.JComboBox<String> cbProductName;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLblImage;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField8;
+    private org.jdesktop.swingx.JXDatePicker jxdpPurchaseDate;
+    private javax.swing.JLabel lblComment;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblIP;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblMacAddress;
+    private javax.swing.JLabel lblModelNo;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblProcessor;
+    private javax.swing.JLabel lblProductBrand;
+    private javax.swing.JLabel lblProductCost;
+    private javax.swing.JLabel lblRAM;
+    private javax.swing.JLabel lblSeialNo;
+    private javax.swing.JTextArea taComment;
+    private javax.swing.JTextField txtIPAddress;
+    private javax.swing.JTextField txtMacAddress;
+    private javax.swing.JTextField txtModelNo;
+    private javax.swing.JTextField txtProcessor;
+    private javax.swing.JTextField txtProductBrand;
+    private javax.swing.JTextField txtProductCost;
+    private javax.swing.JTextField txtRAM;
+    private javax.swing.JTextField txtSerialNo;
+    // End of variables declaration//GEN-END:variables
+}

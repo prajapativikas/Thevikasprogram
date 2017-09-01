@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JTextField" name="jTextField2">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Allot Product"/>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblTask" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="cbTaskToDo" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
+                      <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="cbProductName" min="-2" pref="153" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnShow" pref="70" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblModel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblRequest" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblComment" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDate" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="lblAllotedDate" min="-2" pref="64" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="lblDisplayDate" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblModelNo" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbRequestBy" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jxdpDate" alignment="0" pref="153" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblImgText" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblSerial" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAllotTo" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblId" min="-2" pref="27" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnReAllotProduct" min="-2" pref="129" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="btnAllotProduct" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Component id="btnBreakDownProduct" min="-2" pref="130" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnHome" min="-2" pref="111" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnUnAllotProduct" min="-2" pref="120" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnRepairProduct" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cbProductIdNo" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="cbAllotTo" alignment="0" pref="150" max="32767" attributes="0"/>
+                                      <Component id="lblSerialNo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblImage" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnShow" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbProductName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTask" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbTaskToDo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cbProductIdNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="lblAllotedDate" alignment="0" pref="13" max="32767" attributes="0"/>
+                      <Component id="lblDisplayDate" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblSerialNo" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="lblSerial" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblAllotTo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbAllotTo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblImgText" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblImage" min="-2" pref="96" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="55" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnBreakDownProduct" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnHome" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAllotProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnReAllotProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnUnAllotProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRepairProduct" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jxdpDate" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblModelNo" alignment="0" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="lblModel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblRequest" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbRequestBy" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Component id="lblComment" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblId">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Id"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDate">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblModel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Model No."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSerial">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Serial No."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblComment">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Comment"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAllotProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Allot Product"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to allot product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAllotProductActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnShow">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Show"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to show product details"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbProductIdNo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbProductIdNoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBreakDownProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Break Down Product"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to breadown product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBreakDownProductActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="taComment">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="taCommentMouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblRequest">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Request By"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnHome">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Home"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to go to home"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="org.jdesktop.swingx.JXDatePicker" name="jxdpDate">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jxdpDateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAllotTo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Allot To"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblImgText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Image"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblImage">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblImageMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbProductName">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbProductNameActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbRequestBy">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="Requested By"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbAllotTo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="Allot To"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblModelNo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSerialNo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTask">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Task To Do"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbTaskToDo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Allot Product"/>
+            <StringItem index="1" value="Un-Allot Product"/>
+            <StringItem index="2" value="Re-Allot Product"/>
+            <StringItem index="3" value="Break Down Product"/>
+            <StringItem index="4" value="Repair Product"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTaskToDoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReAllotProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Re-Allot Product"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to reallot product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReAllotProductActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUnAllotProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Un-Allot Product"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to unallot product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUnAllotProductActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRepairProduct">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Repair Product"/>
+        <Property name="toolTipText" type="java.lang.String" value="Click to repair product"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRepairProductActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAllotedDate">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDisplayDate">
+    </Component>
+  </SubComponents>
+</Form>
